@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>8-Bit Tennis Game | @coding.stella</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap'>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    #back-to-app {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 999;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      color: #9dffb0;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid #2dff5f;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    #back-to-app:hover {
+      background: rgba(45, 255, 95, 0.15);
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="../../index.html" id="back-to-app">&larr; CHRNS-DSA</a>
+  <div id="wrap">
+    <canvas id="game" width="220" height="390"></canvas>
+    <div id="scan"></div>
+  </div>
+  <script src="./script.js"></script>
+
+</body>
+</html>

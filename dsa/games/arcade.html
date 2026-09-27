@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arcade — CHRNS-DSA</title>
+<meta name="description" content="Take a break. Two quick games, then back to the grind.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05070F;--surface:#0D1324;--border:rgba(148,163,255,.14);--border-active:rgba(34,211,238,.5);--text:#F1F5FF;--muted:#8B98B8;--primary:#22D3EE;--secondary:#818CF8;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;padding:32px 24px 64px;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+background-image:linear-gradient(rgba(129,140,248,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(129,140,248,.045) 1px,transparent 1px),radial-gradient(55% 45% at 85% 0,rgba(99,102,241,.2),transparent 70%),radial-gradient(45% 40% at 5% 10%,rgba(34,211,238,.12),transparent 70%);background-size:56px 56px,56px 56px,100% 100%,100% 100%}
+.wrap{max-width:980px;margin:0 auto}
+.back{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:12px;border:1px solid var(--border);background:rgba(148,163,255,.06);color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:all .18s var(--ease)}
+.back:hover{color:var(--text);border-color:var(--border-active);transform:translateX(-2px)}
+header{text-align:center;margin:56px 0 44px;animation:rise .6s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+.eyebrow{font:500 12px 'JetBrains Mono',monospace;letter-spacing:.16em;color:var(--primary)}
+h1{margin:10px 0;font:700 clamp(2.2rem,5vw,3.4rem)/1.05 'Space Grotesk',sans-serif;letter-spacing:-.03em;background:linear-gradient(120deg,#22D3EE,#818CF8);-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{max-width:52ch;margin:0 auto;color:var(--muted);line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px}
+.card{position:relative;display:flex;flex-direction:column;gap:14px;padding:22px;border-radius:22px;border:1px solid var(--border);background:var(--surface);color:inherit;text-decoration:none;box-shadow:0 12px 40px rgba(2,6,23,.5);transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease);animation:rise .6s var(--ease) both}
+.card:nth-child(2){animation-delay:.08s}
+.card:hover{border-color:var(--border-active);box-shadow:0 24px 60px rgba(2,6,23,.65),0 0 34px rgba(34,211,238,.12)}
+.preview{display:grid;place-items:center;height:170px;border-radius:14px;color:var(--text);background:radial-gradient(70% 90% at 50% 30%,rgba(34,211,238,.1),transparent 70%),#080D1B;border:1px solid var(--border)}
+.preview svg{height:100%;width:auto;max-width:100%;padding:16px}
+.ball{animation:bounce 2.4s ease-in-out infinite alternate}
+@keyframes bounce{to{transform:translateX(38px)}}
+.name{font:600 1.35rem 'Space Grotesk',sans-serif;letter-spacing:-.02em}
+.desc{color:var(--muted);font-size:14px;line-height:1.6;flex:1}
+.play{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;height:42px;padding:0 18px;border-radius:12px;font-weight:600;font-size:14px;color:#03121A;background:linear-gradient(120deg,#22D3EE,#818CF8)}
+.play svg{transition:transform .25s var(--ease)}.card:hover .play svg{transform:translateX(4px)}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+@media(hover:none){.card{transform:none!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.card{transform:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="../index.html" class="back">&larr; Back to Dashboard</a>
+  <header>
+    <span class="eyebrow">ARCADE</span>
+    <h1>The Arcade</h1>
+    <p>Take five. Two quick games to reset your brain between problem sets — then back to the grind.</p>
+  </header>
+  <div class="grid">
+    <a class="card" href="air-hockey/index.html">
+      <div class="preview"><svg viewBox="0 0 120 80" aria-hidden="true"><rect x="4" y="4" width="112" height="72" rx="14" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/><line x1="60" y1="4" x2="60" y2="76" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/><circle cx="60" cy="40" r="14" fill="none" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/><circle class="ball" cx="40" cy="40" r="7" fill="#22D3EE"/><rect x="12" y="30" width="6" height="20" rx="3" fill="#818CF8"/><rect x="102" y="30" width="6" height="20" rx="3" fill="#818CF8"/></svg></div>
+      <div class="name">Air Hockey</div>
+      <div class="desc">Fast-paced canvas air hockey. Play to 7 against the CPU, track your streak and top speed.</div>
+      <span class="play">Play now <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+    <a class="card" href="tennis/index.html">
+      <div class="preview"><svg viewBox="0 0 120 80" aria-hidden="true"><rect x="4" y="4" width="112" height="72" rx="6" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/><line x1="60" y1="4" x2="60" y2="76" stroke="currentColor" stroke-opacity=".3" stroke-width="2" stroke-dasharray="4 4"/><rect class="ball" x="44" y="36" width="8" height="8" fill="#22D3EE"/><rect x="12" y="26" width="6" height="22" fill="#818CF8"/><rect x="102" y="34" width="6" height="22" fill="#818CF8"/></svg></div>
+      <div class="name">8-Bit Tennis</div>
+      <div class="desc">A retro pixel-art tennis rally. Simple controls, escalating speed, pure arcade nostalgia.</div>
+      <span class="play">Play now <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+  </div>
+</div>
+<script>
+(function(){ if(!matchMedia('(hover:hover) and (pointer:fine)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+document.querySelectorAll('.card').forEach(function(c){
+ c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--ry',((e.clientX-r.left)/r.width-.5)*6+'deg');c.style.setProperty('--rx',(.5-(e.clientY-r.top)/r.height)*6+'deg')});
+ c.addEventListener('pointerleave',function(){c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')});});})();
+</script>
+</body>
+</html>

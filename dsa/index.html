@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHRNS-DSA — Competitive Coding Contests & DSA Sheet Tracker</title>
+    <meta name="description" content="Discipline compounds into mastery. The ultimate dashboard for tracking competitive coding contests and mastering DSA sheets.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS Design System -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Floating Navbar -->
+        <header class="navbar">
+            <a href="#" class="brand-logo" onclick="UIManager.switchTab('challenges'); return false;">
+                <span class="logo-icon">&lt;/&gt;</span><span class="logo-word">CHRNS-DSA</span>
+            </a>
+
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-tab="challenges"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6 2 12l6 6M16 6l6 6-6 6"/></svg><span>Challenges</span></button>
+                <button class="nav-tab" data-tab="mastery"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg><span>DSA Mastery</span></button>
+                <button class="nav-tab" data-tab="roadmap"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8h-4a4 4 0 0 1 0-8h6"/></svg><span>Roadmap</span></button>
+                <button class="nav-tab" data-tab="arcade"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="11" rx="4"/><path d="M7 12.5h4M9 10.5v4"/><circle cx="16" cy="11.5" r=".8"/><circle cx="18" cy="13.5" r=".8"/></svg><span>Arcade</span></button>
+            </nav>
+
+            <div class="nav-actions">
+                                <button class="icon-btn" id="theme-toggle-btn" title="Toggle Theme">☀️</button>
+                
+                <button class="user-profile-btn" id="nav-login-btn">
+                    <span>Log In</span>
+                </button>
+
+                <button class="user-profile-btn" id="nav-profile-btn" style="display: none;">
+                    <div class="user-avatar-circle" id="nav-user-avatar">U</div>
+                    <span id="nav-username-display">User</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- View Section 1: Challenges / CHRNS-DSA Home Page (ACTIVE BY DEFAULT) -->
+        <main id="view-challenges" class="view-section active">
+            <!-- Running DSA Ambient Background Animation -->
+            <div class="dsa-running-bg" aria-hidden="true">
+                <div class="dsa-bg-glow dsa-bg-glow-1"></div>
+                <div class="dsa-bg-glow dsa-bg-glow-2"></div>
+                <div class="dsa-bg-dots"></div>
+                <!-- Dark Glass Vignette Overlay -->
+                <div class="dsa-glass-overlay"></div>
+            </div>
+
+            <!-- Starting Page Top Action Area -->
+            <section class="codecal-hero">
+                <div class="hero-btns-stack">
+                    <button id="explore-contests-btn" class="compact-contest-btn" aria-label="Contests" title="Contests">
+                        <span class="contest-btn-icon-wrap">
+                            <svg class="contest-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                <path d="M4 22h16"></path>
+                                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                            </svg>
+                        </span>
+                        <span class="contest-btn-text">CONTEST</span>
+                    </button>
+
+                    <div class="upcoming-rounds-btn-wrapper">
+                        <button id="upcoming-rounds-hero-btn" class="compact-contest-btn upcoming-btn" aria-label="Upcoming Rounds" title="Upcoming Rounds">
+                            <span class="contest-btn-icon-wrap">
+                                <svg class="contest-btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </span>
+                            <span class="contest-btn-text">UPCOMING ROUNDS</span>
+                        </button>
+
+                        <!-- Popup Dropdown Menu -->
+                        <div id="upcoming-rounds-dropdown" class="upcoming-dropdown-menu">
+                            <button class="upcoming-dropdown-item" data-range="today">
+                                <span class="dropdown-item-icon">📅</span>
+                                <span class="dropdown-item-text">Today</span>
+                            </button>
+                            <button class="upcoming-dropdown-item" data-range="week">
+                                <span class="dropdown-item-icon">🗓️</span>
+                                <span class="dropdown-item-text">This Week</span>
+                            </button>
+                            <button class="upcoming-dropdown-item" data-range="month">
+                                <span class="dropdown-item-icon">📆</span>
+                                <span class="dropdown-item-text">This Month</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="hero-stage">
+            <section class="hero-intro">
+                <span class="eyebrow mono">DSA · CONTESTS · PRACTICE</span>
+                <h1 class="hero-headline">Ctrl your skills.<br>Alt your excuses.<br><span>Enter your career.</span></h1>
+                <p class="hero-copy">The definitive platform for competitive programmers and software engineers — real-time contest telemetry, live countdowns, and structured DSA mastery.</p>
+                <div class="hero-cta">
+                    <button class="btn-primary" onclick="UIManager.switchTab('mastery')">Start learning <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+                    <button class="btn-ghost" onclick="UIManager.switchTab('roadmap')">View roadmap</button>
+                </div>
+            </section>
+            <div id="circles-showcase-container" class="circles-showcase-container"></div>
+            </div>
+
+            <!-- Problem of the Day Section -->
+            <section class="potd-container-card">
+                <div class="potd-card-inner">
+                    <div class="potd-header-row">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span class="potd-badge" id="potd-status-badge">Daily Challenge</span>
+                            <span class="potd-date-tag" id="potd-date-display">Saturday, August 15</span>
+                        </div>
+                        <span class="potd-fire-icon">🔥</span>
+                    </div>
+                    
+                    <h2 class="potd-title">PROBLEM OF THE DAY</h2>
+                    <p class="potd-subtitle">Practice one problem today. Consistency is the only algorithm that always works.</p>
+
+                    <div class="potd-action-row">
+                        <button id="open-potd-modal-btn" class="btn-potd-primary">
+                            <span>⚡ Solve Today's Problem</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dynamic Statistics Bar -->
+            <section class="codecal-stats">
+                <div class="stat-pill-card">
+                    <div class="stat-pill-number" id="hero-stat-problems">600+</div>
+                    <div class="stat-pill-label">DSA PROBLEMS</div>
+                </div>
+                <div class="stat-pill-card">
+                    <div class="stat-pill-number" id="hero-stat-contests">50+</div>
+                    <div class="stat-pill-label">CONTESTS TRACKED</div>
+                </div>
+                <div class="stat-pill-card">
+                    <div class="stat-pill-number" id="hero-stat-platforms">4</div>
+                    <div class="stat-pill-label">PLATFORMS</div>
+                </div>
+            </section>
+
+            <!-- Search & Filter Controls Section -->
+            <section id="challenges-search-section" class="challenges-filter-panel">
+                <div class="contest-search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="contest-search-input" class="contest-search-input" placeholder="Search challenges by name or platform...">
+                </div>
+
+                <div class="contest-platform-pills" id="contest-platform-pills">
+                    <button class="contest-plat-pill active" data-platform="All">All Platforms</button>
+                    <button class="contest-plat-pill" data-platform="LeetCode">LeetCode</button>
+                    <button class="contest-plat-pill" data-platform="CodeChef">CodeChef</button>
+                    <button class="contest-plat-pill" data-platform="CodeForces">CodeForces</button>
+                    <button class="contest-plat-pill" data-platform="AtCoder">AtCoder</button>
+                    <button class="contest-plat-pill" data-platform="GeeksforGeeks">GeeksforGeeks</button>
+                </div>
+
+                <div class="view-mode-toggles">
+                    <button class="view-toggle-btn active" id="view-mode-grid" title="Grid View">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    </button>
+                    <button class="view-toggle-btn" id="view-mode-calendar" title="Calendar View">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Summary Cards Section (4 Cards) -->
+            <section class="summary-cards-grid">
+                <div class="summary-card">
+                    <div class="summary-card-header">
+                        <span class="summary-badge active-now">ACTIVE NOW</span>
+                        <span class="summary-icon">📡</span>
+                    </div>
+                    <div class="summary-card-value" id="summary-active-count">0</div>
+                    <div class="summary-card-sub">ONGOING CHALLENGES</div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-card-header">
+                        <span class="summary-badge upcoming">UPCOMING</span>
+                        <span class="summary-icon">⏱️</span>
+                    </div>
+                    <div id="summary-upcoming-sub">
+                        <!-- Dynamically filled by contest-ui.js -->
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-card-header">
+                        <span class="summary-badge recent">RECENT FINISH</span>
+                        <span class="summary-icon">🏆</span>
+                    </div>
+                    <div class="summary-recent-list" id="summary-recent-list">
+                        <!-- Dynamically filled by contest-ui.js -->
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="summary-card-header">
+                        <span class="summary-badge today">TODAY</span>
+                        <span class="summary-icon">📅</span>
+                    </div>
+                    <div class="summary-card-value" id="summary-today-count">0</div>
+                    <div class="summary-card-sub">CHALLENGES SCHEDULED</div>
+                </div>
+            </section>
+
+            <!-- Main Contest Grid Layout -->
+            <div id="contests-grid-layout" class="contests-grid-layout">
+                <div class="contests-two-col">
+                    <!-- Live Challenges (Left Column) -->
+                    <div class="contests-col-left">
+                        <h2 class="section-title">
+                            <span class="title-icon">📶</span> Live Challenges
+                        </h2>
+                        <div id="live-challenges-list" class="contest-cards-list"></div>
+                    </div>
+
+                    <!-- Recently Concluded (Right Column) -->
+                    <div class="contests-col-right">
+                        <h2 class="section-title">
+                            <span class="title-icon">🏁</span> Recently Concluded
+                        </h2>
+                        <div id="recently-concluded-list" class="contest-cards-list"></div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Rounds (Bottom Full Width Grid) -->
+                <!-- <div class="contests-upcoming-section">
+                    <h2 class="section-title">
+                        <span class="title-icon">⏳</span> Upcoming Rounds
+                    </h2>
+                    <div id="upcoming-rounds-list" class="upcoming-cards-grid"></div>
+                </div> -->
+
+                <!-- 🔥 FULL-YEAR STREAK CALENDAR SECTION (BELOW UPCOMING ROUNDS) -->
+                <section id="yearly-streak-section" class="yearly-streak-section">
+                    <div class="glass-card streak-card">
+                        <div class="streak-card-header">
+                            <div class="streak-header-left">
+                                <h2 class="streak-title">
+                                    <span class="streak-fire-icon">🔥</span> YOUR YEARLY STREAK
+                                </h2>
+                                <div class="streak-year-badge" id="streak-year-badge">2026</div>
+                            </div>
+                            <div class="streak-header-right">
+                                <div class="streak-stat-pill">
+                                    <span class="streak-pill-label">Current Streak</span>
+                                    <span class="streak-pill-value" id="yearly-current-streak-val">0 Days</span>
+                                </div>
+                                <div class="streak-stat-pill">
+                                    <span class="streak-pill-label">Longest Streak</span>
+                                    <span class="streak-pill-value" id="yearly-longest-streak-val">0 Days</span>
+                                </div>
+                                <div class="streak-stat-pill">
+                                    <span class="streak-pill-label">Active Days</span>
+                                    <span class="streak-pill-value" id="yearly-active-days-val">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Calendar Month Grid Container -->
+                        <div class="streak-calendar-wrapper">
+                            <div id="streak-calendar-grid" class="streak-calendar-grid"></div>
+                        </div>
+
+                        <!-- Legend & Subtitle Footer -->
+                        <div class="streak-footer">
+                            <div class="streak-legend">
+                                <span>Less</span>
+                                <div class="legend-box level-0" title="0 problems"></div>
+                                <div class="legend-box level-1" title="1 problem"></div>
+                                <div class="legend-box level-2" title="2-3 problems"></div>
+                                <div class="legend-box level-3" title="4-5 problems"></div>
+                                <div class="legend-box level-4" title="6+ problems"></div>
+                                <span>More</span>
+                            </div>
+                            <div class="streak-today-indicator">
+                                <span class="today-box-sample"></span> Today
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Calendar View Container (Hidden by default) -->
+            <div id="contests-calendar-layout" class="contests-calendar-layout" style="display: none;">
+                <!-- Dynamically filled by contest-ui.js -->
+            </div>
+
+            <!-- CHRNS-DSA Structured Footer -->
+            <footer class="codecal-footer">
+                <div class="footer-badges-row">
+                    <div class="footer-badge-item"><span>✨</span> <span id="footer-problems-count">633+</span> Curated DSA Problems</div>
+                    <div class="footer-badge-item"><span>🌐</span> Live Global Contest Tracking</div>
+                    <div class="footer-badge-item"><span>🔄</span> Automated Real-Time Sync</div>
+                </div>
+
+                <div class="footer-main-grid">
+                    <div class="footer-brand-col">
+                        <div class="footer-brand"><span class="logo-icon">&lt;/&gt;</span><span class="logo-word">CHRNS-DSA</span></div>
+                        <p class="footer-desc">The definitive platform for competitive programmers and software engineers — real-time contest telemetry, live countdowns, and structured DSA mastery.</p>
+                        <p class="footer-desc" style="margin-top: -10px; font-style: italic; opacity: 0.85;">Consistency is the only algorithm that works. Built by Charan — reach out anytime for guidance or a code review.</p>
+                        <div class="footer-crafted">Crafted with passion by <strong>R V S charan</strong></div>
+                        <div class="footer-social-links">
+<a href="https://github.com/Charan733" target="_blank" class="social-icon" title="GitHub" aria-label="GitHub">
+    <svg height="32" width="32" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
+        <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82A7.48 7.48 0 0 0 8 3.06c-.68.01-1.36.09-2 .32-1.53-1.04-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.16.73.72.82 1.13.16.45.68 1.35 3.06.88.01.47.01.92.01 1.05 0 .21-.15.47-.56.38A8.006 8.006 0 0 1 0 8c0-4.42 3.58-8 8-8z"></path>
+    </svg>
+</a>
+                            <a href="https://www.linkedin.com/in/rayadurgam-venkata-sai-charan-48b59034b/" target="_blank" class="social-icon" title="LinkedIn"><span class="linkedin-logo">in</span></a>
+                        </div>
+                    </div>
+
+                    <div class="footer-links-col">
+                        <h4>PLATFORM</h4>
+                        <ul>
+                            <li><a href="#" onclick="UIManager.switchTab('challenges'); return false;">Challenges</a></li>
+                            <li><a href="#" onclick="UIManager.switchTab('mastery'); return false;">DSA Mastery <span class="badge-mini" id="footer-mastery-badge">633</span></a></li>
+                            <li><a href="https://whimsical.com/dsa-roadmap-JegsSL6nFr1b3V25bRzpYA" target="_blank">Visual Roadmap</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-links-col">
+                        <h4>JUDGES</h4>
+                        <ul>
+                            <li><a href="https://leetcode.com/contest/" target="_blank">LeetCode</a></li>
+                            <li><a href="https://codeforces.com/contests" target="_blank">CodeForces</a></li>
+                            <li><a href="https://www.codechef.com/contests" target="_blank">CodeChef</a></li>
+                            <li><a href="https://atcoder.jp/contests/" target="_blank">AtCoder</a></li>
+                            <li><a href="https://www.geeksforgeeks.org/contests/" target="_blank">GFG</a></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="footer-links-col">
+                        <h4>OPEN SOURCE</h4>
+                        <ul>
+                            <li><a href="#" onclick="ContestUI.showToast('Report feature available on GitHub.'); return false;">Report an Issue</a></li>
+                            <li><a href="#" onclick="ContestUI.showToast('Developer contact: rayadurgam.vs.charan@gmail.com'); return false;">Contact Developer</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom-row">
+                    <div class="footer-copyright">© 2026 CHRNS-DSA. All rights reserved.</div>
+                    <div class="footer-status-group">
+                        <span id="footer-live-clock" class="footer-clock"></span>
+                        <span class="system-status-pill">🟢 ALL SYSTEMS OPERATIONAL</span>
+                    </div>
+                </div>
+            </footer>
+
+            <button id="back-to-top-btn" class="back-to-top-btn" title="Back to Top">↑</button>
+        </main>
+
+        <!-- View Section 2: DSA Mastery (Problem Practice) -->
+        <main id="view-roadmap" class="view-section">
+            <section class="page-head">
+                <span class="eyebrow mono">LEARNING PATH</span>
+                <h1>DSA Roadmap</h1>
+                <p>Follow the sections in order. Progress reflects the problems you have completed in each one.</p>
+                <a class="btn-ghost" href="https://whimsical.com/dsa-roadmap-JegsSL6nFr1b3V25bRzpYA" target="_blank" rel="noopener noreferrer">Open visual roadmap ↗</a>
+            </section>
+            <ol id="roadmap-path" class="roadmap-path"></ol>
+        </main>
+
+        <main id="view-mastery" class="view-section">
+            <!-- Hero Banner & Stats -->
+            <section class="hero-banner">
+                <div class="hero-header-row">
+                    <div class="hero-title-group">
+                        <h1>Good day, <span id="welcome-user-name">Practice Explorer</span>!</h1>
+                        <p id="hero-sub-progress">Track your master coding problems at your own pace.</p>
+                    </div>
+                    <button class="btn-primary" onclick="UIManager.switchTab('mastery')">
+                        Continue Learning →
+                    </button>
+                </div>
+                <div style="background: rgba(255,255,255,0.06); height: 6px; border-radius: 3px; overflow: hidden; margin-top: 8px;">
+                    <div id="hero-progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--primary-purple), var(--secondary-violet)); transition: width 0.5s ease;"></div>
+                </div>
+            </section>
+
+            <section id="mastery-dashboard" class="mastery-dashboard" aria-label="Progress dashboard"></section>
+
+            <!-- Stats Row -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card-label">TOTAL PROBLEMS</div>
+                    <div class="stat-card-value" id="stat-total">633</div>
+                    <div class="stat-card-sub">Striver A2Z + Extended</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">COMPLETED</div>
+                    <div class="stat-card-value" id="stat-completed" style="color: var(--diff-easy);">0</div>
+                    <div class="stat-card-sub">Solved so far</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">REMAINING</div>
+                    <div class="stat-card-value" id="stat-remaining">633</div>
+                    <div class="stat-card-sub">Left to solve</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">CURRENT STREAK</div>
+                    <div class="stat-card-value" id="stat-streak" style="color: var(--diff-medium);">0</div>
+                    <div class="stat-card-sub">Active Days</div>
+                </div>
+            </section>
+
+            <!-- Filter Controls Bar -->
+            <section class="filter-bar-card">
+                <div class="search-input-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search-input" class="search-input" placeholder="Search problems by name, topic, section, platform, or difficulty...">
+                </div>
+
+                <div class="filters-row">
+                    <div class="filter-pills-group" id="difficulty-pills">
+                        <button class="filter-pill active" data-difficulty="All">All</button>
+                        <button class="filter-pill" data-difficulty="Easy">Easy</button>
+                        <button class="filter-pill" data-difficulty="Medium">Medium</button>
+                        <button class="filter-pill" data-difficulty="Hard">Hard</button>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <select id="platform-select" class="select-dropdown">
+                            <option value="All">All Platforms</option>
+                            <option value="LeetCode">LeetCode</option>
+                            <option value="GeeksforGeeks">GeeksforGeeks</option>
+                            <option value="CodeChef">CodeChef</option>
+                            <option value="HackerRank">HackerRank</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                        <select id="topic-select" class="select-dropdown">
+                            <option value="All">All Sections</option>
+                        </select>
+
+                        <select id="status-select" class="select-dropdown">
+                            <option value="All">All Status</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Incomplete">Incomplete</option>
+                        </select>
+
+                        <button id="favorites-toggle-btn" class="filter-pill" title="Favorites Only">
+                            ★ Favorites
+                        </button>
+
+                        <select id="sort-select" class="select-dropdown">
+                            <option value="default">A2Z Order</option>
+                            <option value="title-asc">Name A-Z</option>
+                            <option value="title-desc">Name Z-A</option>
+                            <option value="difficulty-asc">Easy → Hard</option>
+                            <option value="difficulty-desc">Hard → Easy</option>
+                            <option value="completed-first">Completed First</option>
+                            <option value="incomplete-first">Incomplete First</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Topics Accordion Container -->
+            <section id="topics-accordion-container" class="topics-accordion-list">
+                <!-- Dynamically populated by ui.js -->
+            </section>
+        </main>
+    </div>
+
+    <!-- Upcoming Rounds Modal Overlay -->
+    <div id="upcoming-rounds-modal-overlay" class="modal-overlay">
+        <div class="modal-box upcoming-rounds-modal-box">
+            <div class="modal-header">
+                <div>
+                    <h2 id="upcoming-rounds-modal-title" style="font-size: 1.35rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                        <span>◷ UPCOMING ROUNDS</span>
+                    </h2>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;" id="upcoming-rounds-modal-subtitle">
+                        Real-time competition schedule
+                    </p>
+                </div>
+                <button class="close-modal-btn" id="close-upcoming-rounds-modal">&times;</button>
+            </div>
+
+            <div class="upcoming-filter-tabs" id="upcoming-modal-tabs">
+                <button class="upcoming-modal-tab active" data-range="today">Today</button>
+                <button class="upcoming-modal-tab" data-range="week">This Week</button>
+                <button class="upcoming-modal-tab" data-range="month">This Month</button>
+            </div>
+
+            <div id="upcoming-rounds-modal-list" class="upcoming-modal-list">
+                <!-- Dynamically populated contest cards -->
+            </div>
+        </div>
+    </div>
+
+    <!-- POTD Platform Selection Modal -->
+    <div id="potd-modal-overlay" class="modal-overlay">
+        <div class="modal-box potd-modal-box">
+            <div class="modal-header">
+                <div>
+                    <h2 style="font-size: 1.35rem; font-weight: 800;">PROBLEM OF THE DAY</h2>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">Choose a platform for today's challenge</p>
+                </div>
+                <button class="close-modal-btn" id="close-potd-modal">&times;</button>
+            </div>
+
+            <div class="potd-platform-options">
+                <!-- LeetCode Platform Card -->
+                <div class="potd-plat-option-card">
+                    <div class="potd-plat-header">
+                        <span class="platform-badge plat-leetcode">LEETCODE</span>
+                        <span class="potd-plat-title">Daily LeetCoding Challenge</span>
+                    </div>
+                    <p class="potd-plat-desc">Official daily problem updated every 24 hours (UTC).</p>
+                    <div class="potd-plat-actions">
+                        <button class="btn-contest-primary" id="potd-open-leetcode-btn">
+                            Solve Today's Problem ↗
+                        </button>
+                        <button class="btn-contest-secondary" id="potd-complete-leetcode-btn">
+                            Mark as Completed
+                        </button>
+                    </div>
+                </div>
+
+                <!-- GeeksforGeeks Platform Card -->
+                <div class="potd-plat-option-card">
+                    <div class="potd-plat-header">
+                        <span class="platform-badge plat-gfg">GEEKSFORGEEKS</span>
+                        <span class="potd-plat-title">Problem of the Day</span>
+                    </div>
+                    <p class="potd-plat-desc">Official GFG Problem of the Day updated daily.</p>
+                    <div class="potd-plat-actions">
+                        <button class="btn-contest-primary" id="potd-open-gfg-btn">
+                            Solve Today's Problem ↗
+                        </button>
+                        <button class="btn-contest-secondary" id="potd-complete-gfg-btn">
+                            Mark as Completed
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal (Login / Signup) -->
+    <div id="auth-modal-overlay" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2 id="auth-modal-title">Welcome Back</h2>
+                <button class="close-modal-btn" id="close-auth-modal">&times;</button>
+            </div>
+
+            <form id="auth-form" data-mode="login">
+                <div class="form-group">
+                    <label for="auth-username">Username</label>
+                    <input type="text" id="auth-username" class="form-input" placeholder="Enter username..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="auth-password">Password</label>
+                    <input type="password" id="auth-password" class="form-input" placeholder="Enter password..." required>
+                </div>
+
+                <div class="form-group" id="auth-confirm-group" style="display: none;">
+                    <label for="auth-confirm-password">Confirm Password</label>
+                    <input type="password" id="auth-confirm-password" class="form-input" placeholder="Confirm password...">
+                </div>
+
+                <div id="auth-error-msg" class="form-error-msg"></div>
+
+                <button type="submit" class="btn-primary" id="auth-submit-btn" style="width: 100%; justify-content: center; margin-top: 16px;">
+                    Log In
+                </button>
+            </form>
+
+            <div class="auth-switch-text">
+                <span id="auth-switch-prompt">Don't have an account?</span>
+                <span id="auth-switch-link" class="auth-switch-link">Sign Up</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes Modal -->
+    <div id="notes-modal-overlay" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2 id="notes-modal-title">Personal Notes</h2>
+                <button class="close-modal-btn" id="close-notes-modal">&times;</button>
+            </div>
+
+            <div class="form-group">
+                <label for="notes-textarea">Write your approach, time complexity, or key observations:</label>
+                <textarea id="notes-textarea" class="form-textarea" placeholder="e.g. Uses two pointers approach O(N) time O(1) space..."></textarea>
+            </div>
+
+            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 16px;">
+                <button class="btn-secondary" onclick="document.getElementById('notes-modal-overlay').classList.remove('active')">Cancel</button>
+                <button class="btn-primary" id="save-note-btn">Save Note</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings / Profile Modal -->
+    <div id="settings-modal-overlay" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>Account Settings & Data</h2>
+                <button class="close-modal-btn" id="close-settings-modal">&times;</button>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 18px;">
+                <div style="background: var(--surface-input); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                    <div style="font-weight: 700; margin-bottom: 6px;">Backup & Data Portability</div>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">Export or restore your personal progress, notes, favorites, and streaks as JSON.</p>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn-secondary" id="export-data-btn">📥 Export JSON</button>
+                        <label class="btn-secondary" style="cursor: pointer;">
+                            📤 Import JSON
+                            <input type="file" id="import-file-input" accept=".json" style="display: none;">
+                        </label>
+                    </div>
+                </div>
+
+                <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); padding: 16px; border-radius: var(--radius-md);">
+                    <div style="font-weight: 700; color: var(--diff-hard); margin-bottom: 6px;">Reset Progress</div>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">Clear completed problems, favorites, and streak data for this user account.</p>
+                    <button class="btn-secondary" id="reset-data-btn" style="border-color: var(--diff-hard); color: var(--diff-hard);">Reset My Progress</button>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+                    <button class="btn-secondary" id="nav-logout-btn" style="background: rgba(239,68,68,0.15); color: #fca5a5; border-color: rgba(239,68,68,0.3);">
+                        Log Out
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script>
+        // Gate: this dashboard is only reachable after logging in on the
+        // CHRNS-DSA entry page. If there's no active session, send the
+        // visitor back to the login gate instead of loading the app.
+        (function () {
+            try {
+                if (!StorageManager.getCurrentUserId()) {
+                    window.location.replace("../index.html");
+                }
+            } catch (e) {
+                window.location.replace("../index.html");
+            }
+        })();
+    </script>
+    <script src="js/auth.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/streak-calendar.js"></script>
+    <script src="js/contests.js"></script>
+    <script src="js/contest-ui.js"></script>
+    <script src="js/potd.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/custom-select.js"></script>
+    <script>Dash.hook();</script>
+    <script src="js/motion.js"></script>
+    <script src="js/Circles.js"></script>
+</body>
+</html>
